@@ -24,3 +24,22 @@ LANGUAGES:
 
 # STATUS
 * Project is complete.
+
+# LEARNING OUTCOMES
+* Callbacks  
+* Promises  
+* Async/Await (with `try...catch`)  
+* Promise.all → Run weather + news requests simultaneously  
+* Promise.race → Get the fastest response 
+
+# SCREENSHOTS
+* callback version output
+![Dashboard Screenshot](./assets/callback.png)
+
+* async version output
+![Dashboard Screenshot](./assets/async.png)
+![Dashboard Screenshot](./assets/async1.png)
+
+* promise version output
+![Dashboard Screenshot](./assets/promise.png)
+![Dashboard Screenshot](./assets/promise1.png)

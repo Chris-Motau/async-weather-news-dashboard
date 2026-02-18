@@ -20,9 +20,9 @@ LANGUAGES:
 * Navigate to async-weather-news-dashboard(cd async-weather-news-dashboard).
 * Install Dependencies(npm install)
 * Compile TypeScript(npx tsc)
-* Use "node dist/asyncAwaitVersion.ts" to run asyncAwaitVersion.
-* Use "node dist/callbackVersion.ts" to run callbackVersion.
-* Use "node dist/promiseVersion.ts" to run promiseVersion.
+* Use "npm run async" to run asyncAwaitVersion.
+* Use "npm run callback" to run callbackVersion.
+* Use "npm run promise" to run promiseVersion.
 
 
 # STATUS

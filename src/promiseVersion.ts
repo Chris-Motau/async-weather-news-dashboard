@@ -22,7 +22,7 @@ interface NewsResponse {
   posts: News[];
 }
 
-function getJsonAsync<T>(url: string): Promise<T> {
+function getJsonWithPromise<T>(url: string): Promise<T> {
   return new Promise((resolve, reject) => {
     const req = https.get(url, (res: IncomingMessage) => {
       const { statusCode } = res;
@@ -56,40 +56,36 @@ function getJsonAsync<T>(url: string): Promise<T> {
   });
 }
 
-console.log('Weather and news (Async/Await)');
+console.log('Weather and news (Promises)');
 
-async function main() {
-  try {
-    const weather = await getJsonAsync<Weather>(weatherURL);
+getJsonWithPromise<Weather>(weatherURL)
+  .then((weather) => {
     const temperature = weather?.hourly?.temperature_2m?.[0] ?? 'unknown';
     console.log(`Weather temperature (Pretoria): ${temperature}°C`);
-
-    const news = await getJsonAsync<NewsResponse>(newsURL);
+    return getJsonWithPromise<NewsResponse>(newsURL);
+  })
+  .then((news) => {
     const list = news?.posts ?? [];
     console.log('Top Headlines');
     list.forEach((p, i) => {
       console.log(`${i + 1}. ${p.title}`);
     });
-
-    console.log('Done (async/await).');
-
-    
-    const [w, n] = await Promise.all([
-      getJsonAsync<Weather>(weatherURL),
-      getJsonAsync<NewsResponse>(newsURL),
-    ]);
-    console.log('Weather:', w.hourly?.temperature_2m?.[0]);
-    
-
-   
-    const fastest = await Promise.race([
-      getJsonAsync<Weather>(weatherURL),
-      getJsonAsync<NewsResponse>(newsURL),
-    ]);
-    console.log('\nPromise.race result:', fastest);
-  } catch (err: any) {
+    console.log('Done (promises).');
+  })
+  .catch((err) => {
     console.error('Error:', err.message);
-  }
-}
+  });
 
-main();
+Promise.all([
+  getJsonWithPromise<Weather>(weatherURL),
+  getJsonWithPromise<NewsResponse>(newsURL),
+]).then(([weather, news]) => {
+  console.log('Weather temperature:', weather?.hourly?.temperature_2m?.[0]);
+});
+
+Promise.race([
+  getJsonWithPromise<Weather>(weatherURL),
+  getJsonWithPromise<NewsResponse>(newsURL),
+]).then((fastest) => {
+  console.log('\nPromise.race result (first response arrived):', fastest);
+});

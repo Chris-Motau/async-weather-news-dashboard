@@ -16,8 +16,10 @@ LANGUAGES:
 * Typescript
 
 # INSTALLATION
-* Clone repository.
+* Clone repository git clone https://github.com/Chris-Motau/async-weather-news-dashboard.git.
 * Navigate to async-weather-news-dashboard(cd async-weather-news-dashboard).
+* Open VS code .
+* Navigate to dev branch gitcheckout dev
 * Install Dependencies(npm install)
 * Use "npm run async" to run asyncAwaitVersion.
 * Use "npm run callback" to run callbackVersion.
